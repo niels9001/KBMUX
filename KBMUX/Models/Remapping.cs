@@ -14,4 +14,11 @@ namespace KBMUX
         public string AppName { get; set; } = "All apps";
         public bool IsEnabled { get; set; } = true;
     }
+
+
+    public class URLShortcut
+    {
+        public List<string> Shortcut { get; set; }
+        public string URL { get; set; }
+    }
 }

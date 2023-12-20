@@ -36,9 +36,17 @@ namespace KBMUX
             {
                 switch ((string)selectedItem.Tag)
                 {
-                    case "Shortcuts": NavigationFrame.Navigate(typeof(Pages.Shortcuts)); break;
-                    case "Keys": NavigationFrame.Navigate(typeof(Pages.Keys)); break;
+                    case "Remappings": NavigationFrame.Navigate(typeof(Pages.Shortcuts)); break;
+                 
                     case "Text": NavigationFrame.Navigate(typeof(Pages.Text)); break;
+
+                    case "URLs":
+                        NavigationFrame.Navigate(typeof(Pages.URLs)); break;
+
+                    case "Programs":
+                        NavigationFrame.Navigate(typeof(Pages.Programs)); break;
+
+
                 }
             }
         }

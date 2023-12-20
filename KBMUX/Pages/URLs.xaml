@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="KBMUX.Pages.Text"
+    x:Class="KBMUX.Pages.URLs"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:KBMUX.Controls"
@@ -11,7 +11,7 @@
 
     <Grid Padding="16">
         <StackPanel>
-            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Text shortcuts allow you to insert text in any inputfield when you use the configured text" />
+            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="URL shortcuts allow you to open a URL when you use the configured shortcut" />
             <Button
                 x:Name="NewShortcutBtn"
                 Grid.Column="0"
@@ -27,11 +27,9 @@
                         FontFamily="Segoe Fluent Icons"
                         Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
                         Text="&#xE109;" />
-                    <TextBlock Text="Text shortcut" />
+                    <TextBlock Text="URL shortcut" />
                 </StackPanel>
             </Button>
-
-
             <StackPanel
                 Margin="0,12,0,0"
                 Orientation="Vertical"
@@ -71,7 +69,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                        Text="Text" />
+                        Text="URL" />
 
                     <ListView
                         Grid.Row="1"
@@ -115,14 +113,10 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                    <TextBlock 
+                                    <HyperlinkButton
                                         Grid.Column="1"
-                                        Grid.ColumnSpan="2"
-                                        FontSize="12"
-                                        TextTrimming="CharacterEllipsis"
-                                        VerticalAlignment="Center"
-                                        Margin="0,0,0,0"
-                                        Text="{x:Bind URL}" />
+                                        Margin="-12,0,0,0"
+                                        Content="{x:Bind URL}" />
                                     <ToggleSwitch
                                         Grid.ColumnSpan="4"
                                         Margin="0,0,-112,0"
@@ -139,7 +133,7 @@
         </StackPanel>
         <ContentDialog
             x:Name="KeyDialog"
-            Title="New text shortcut"
+            Title="New URL shortcut"
             Width="480"
             Height="360"
             MinWidth="600"
@@ -148,8 +142,8 @@
             PrimaryButtonText="Save"
             SecondaryButtonText="Cancel">
             <StackPanel
-                Width="360"
-                Height="360"
+                Width="320"
+                Height="264"
                 Orientation="Vertical">
                 <TextBlock Margin="0,12,0,8" Text="Shortcut" />
 
@@ -167,11 +161,9 @@
                     </ToggleButton.Content>
                 </ToggleButton>
                 <TextBox
-                    Height="200"
                     Margin="0,24,0,0"
-                    Header="Text to insert"
-                    Text="https://www.microsoft.com"
-                    TextWrapping="Wrap" />
+                    Header="URL to open"
+                    Text="https://www.microsoft.com" />
             </StackPanel>
         </ContentDialog>
     </Grid>

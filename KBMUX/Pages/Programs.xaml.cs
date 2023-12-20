@@ -17,17 +17,15 @@ using Windows.UI.Xaml.Navigation;
 
 namespace KBMUX.Pages
 {
-    public sealed partial class Keys : Page
+    public sealed partial class Programs : Page
     {
-        ObservableCollection<Remapping> RemappedKeys { get; set; }
-        public Keys()
+        ObservableCollection<URLShortcut> Shortcuts { get; set; }
+        public Programs()
         {
             this.InitializeComponent();
-            RemappedKeys = new ObservableCollection<Remapping>();
-            RemappedKeys.Add(new Remapping() { OriginalKeys = new List<string>() { "Ctrl (Left)" }, RemappedKeys = new List<string>() { "Ctrl (Right)" }, IsAllApps = true });
-            RemappedKeys.Add(new Remapping() { OriginalKeys = new List<string>() { "Numpad 1" }, RemappedKeys = new List<string>() { "Ctrl", "F" }, IsAllApps = true });
-            RemappedKeys.Add(new Remapping() { OriginalKeys = new List<string>() { "Numpad 2" }, RemappedKeys = new List<string>() { "Alt", "F" }, IsAllApps = true, AppName = "outlook.exe" });
-        }
+            Shortcuts = new ObservableCollection<URLShortcut>();
+            Shortcuts.Add(new URLShortcut() { Shortcut = new List<string>() { "Win", "U", }, URL = "https://www.xbox.com" });
+      }
 
         private async void NewShortcutBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -37,8 +35,6 @@ namespace KBMUX.Pages
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Remapping selectedShortcut = e.ClickedItem as Remapping;
-            ShortcutControl.SetOriginalKeys(selectedShortcut.OriginalKeys);
-            ShortcutControl.SetRemappedKeys(selectedShortcut.RemappedKeys);
             await KeyDialog.ShowAsync();
         }
     }

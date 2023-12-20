@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="KBMUX.Pages.Text"
+    x:Class="KBMUX.Pages.Programs"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:KBMUX.Controls"
@@ -11,7 +11,7 @@
 
     <Grid Padding="16">
         <StackPanel>
-            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Text shortcuts allow you to insert text in any inputfield when you use the configured text" />
+            <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Program shortcuts allow you to open specific applications when you use the configured shortcut" />
             <Button
                 x:Name="NewShortcutBtn"
                 Grid.Column="0"
@@ -27,11 +27,9 @@
                         FontFamily="Segoe Fluent Icons"
                         Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
                         Text="&#xE109;" />
-                    <TextBlock Text="Text shortcut" />
+                    <TextBlock Text="Program shortcut" />
                 </StackPanel>
             </Button>
-
-
             <StackPanel
                 Margin="0,12,0,0"
                 Orientation="Vertical"
@@ -71,7 +69,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                        Text="Text" />
+                        Text="Program" />
 
                     <ListView
                         Grid.Row="1"
@@ -115,14 +113,31 @@
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                    <TextBlock 
+                                    <StackPanel
                                         Grid.Column="1"
-                                        Grid.ColumnSpan="2"
-                                        FontSize="12"
-                                        TextTrimming="CharacterEllipsis"
-                                        VerticalAlignment="Center"
-                                        Margin="0,0,0,0"
-                                        Text="{x:Bind URL}" />
+                                        Orientation="Horizontal"
+                                        Spacing="8">
+                                        <Image Width="16" Source="ms-appx:///Assets/Images/FluentIconsKeyboardManager.png" />
+                                        <TextBlock VerticalAlignment="Center" Text="Keyboardmanager.exe" />
+                                        <FontIcon
+                                            VerticalAlignment="Center"
+                                            FontSize="14"
+                                            Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                                            Glyph="&#xE946;">
+                                            <ToolTipService.ToolTip>
+                                                <TextBlock>
+                                                    <Run FontWeight="SemiBold" Text="Arguments:" />
+                                                    <Run Text="-config json loremipsum" />
+                                                    <LineBreak />
+                                                    <Run FontWeight="SemiBold" Text="Starting directory:" />
+                                                    <Run Text="C:\Users\Dev\PowerToys\bin" />
+                                                    <LineBreak />
+                                                    <Run FontWeight="SemiBold" Text="Launch state:" />
+                                                    <Run Text="Minimized" />
+                                                </TextBlock>
+                                            </ToolTipService.ToolTip>
+                                        </FontIcon>
+                                    </StackPanel>
                                     <ToggleSwitch
                                         Grid.ColumnSpan="4"
                                         Margin="0,0,-112,0"
@@ -139,18 +154,14 @@
         </StackPanel>
         <ContentDialog
             x:Name="KeyDialog"
-            Title="New text shortcut"
+            Title="New program shortcut"
             Width="480"
-            Height="360"
             MinWidth="600"
             MaxWidth="600"
             PrimaryButtonStyle="{StaticResource AccentButtonStyle}"
             PrimaryButtonText="Save"
             SecondaryButtonText="Cancel">
-            <StackPanel
-                Width="360"
-                Height="360"
-                Orientation="Vertical">
+            <StackPanel Width="480" Orientation="Vertical">
                 <TextBlock Margin="0,12,0,8" Text="Shortcut" />
 
                 <ToggleButton
@@ -160,18 +171,51 @@
                     Style="{StaticResource CustomShortcutToggleButtonStyle}">
                     <ToggleButton.Content>
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <controls:KeyVisual Content="Shift" VisualType="SmallOutline" />
                             <controls:KeyVisual Content="Win" VisualType="SmallOutline" />
-                            <controls:KeyVisual Content="M" VisualType="SmallOutline" />
+                            <controls:KeyVisual Content="U" VisualType="SmallOutline" />
                         </StackPanel>
                     </ToggleButton.Content>
                 </ToggleButton>
-                <TextBox
-                    Height="200"
+                <Grid
                     Margin="0,24,0,0"
-                    Header="Text to insert"
-                    Text="https://www.microsoft.com"
-                    TextWrapping="Wrap" />
+                    ColumnSpacing="4"
+                    RowSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBox Text="Keyboardmanager.exe" Header="Application" />
+                    <Button
+                        Grid.Column="1"
+                        Height="32"
+                        VerticalAlignment="Bottom"
+                        Content="{ui:FontIcon FontSize=14,
+                                              Glyph=&#xE8DA;}" />
+                    <TextBox Grid.Row="1" Header="Arguments"  Text="-config json loremipsum"/>
+                    <TextBox Grid.Row="2" Header="Start in directory" Text="C:\Users\Dev\PowerToys\bin" />
+                    <Button
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Height="32"
+                        VerticalAlignment="Bottom"
+                        Content="{ui:FontIcon FontSize=14,
+                                              Glyph=&#xE8DA;}" />
+
+                    <ComboBox
+                        Grid.Row="3"
+                        Header="Launch state"
+                        SelectedIndex="0">
+                        <ComboBoxItem Content="Show window" />
+                        <ComboBoxItem Content="Minimized" />
+                    </ComboBox>
+                </Grid>
             </StackPanel>
         </ContentDialog>
     </Grid>
